@@ -1,0 +1,112 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Frreelancer Profile &nbsp; {% block title  %}   {% endblock title %} </title>
+
+        <!-- BEGIN META -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="your,keywords">
+        <meta name="description" content="Short explanation about this website">
+        <!-- END META -->
+
+        <!-- BEGIN STYLESHEETS -->
+        <link href='http://fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900' rel='stylesheet' type='text/css'/>
+        <link type="text/css" rel="stylesheet" href="{% static 'administration/css/theme-default/bootstrap.css' %}" />
+        <link type="text/css" rel="stylesheet" href="{% static 'administration/css/theme-default/materialadmin.css' %}" />
+        <link type="text/css" rel="stylesheet" href="{% static 'administration/css/theme-default/font-awesome.min.css' %}" />
+        <link type="text/css" rel="stylesheet" href="{% static 'administration/css/theme-default/material-design-iconic-font.min.css' %}" />
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jplayer/2.9.2/skin/blue.monday/css/jplayer.blue.monday.min.css"/>
+        <link href="//cdn.bootcss.com/bootstrap-datetimepicker/4.17.44/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
+
+        <link href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css" rel="stylesheet" media="screen">
+        <script src="{% static 'administration/js/libs/jquery/jquery-1.11.2.min.js' %}">
+        </script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jplayer/2.9.2/jplayer/jquery.jplayer.min.js"></script>
+        {% block head %}{% endblock %}
+    </head>
+    <body class="menubar-hoverable header-fixed menubar-pin ">
+        <header id="header" >
+            <div class="headerbar">
+                <div class="headerbar-left">
+                    <ul class="header-nav header-nav-options">
+                        <li class="header-nav-brand" >
+                            <div class="brand-holder">
+                                <a href="#">
+                                    <span class="text-lg text-bold text-primary">Freelancer Profile</span>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="headerbar-right">
+                    <ul class="header-nav header-nav-options">
+                        <li>
+                            <form class="navbar-search" role="search">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="headerSearch" placeholder="Enter your keyword">
+                                </div>
+                                <button type="submit" class="btn btn-icon-toggle ink-reaction"><i class="fa fa-search"></i></button>
+                            </form>
+                        </li>
+                    </ul><!--end .header-nav-options -->
+                    <!--end .header-nav-profile -->
+                </div><!--end #header-navbar-collapse -->
+            </div>
+        </header>
+        <!-- END HEADER-->
+        
+        <!-- BEGIN BASE-->
+        <div id="">
+            <div class="offcanvas">
+            </div>
+            {% block maincontent %}                
+        
+            {% endblock maincontent %}
+         
+        </div>
+
+
+        <!-- BEGIN JAVASCRIPT -->
+        
+        <script src="{% static 'administration/js/libs/jquery/jquery-migrate-1.2.1.min.js' %}"></script>
+        <script src="{% static 'administration/js/libs/bootstrap/bootstrap.min.js' %}"></script>
+        <script src="{% static 'administration/js/libs/spin.js/spin.min.js' %}"></script>
+        <script src="{% static 'administration/libs/autosize/jquery.autosize.min.js' %}"></script>
+        <script src="{% static 'administration/libs/nanoscroller/jquery.nanoscroller.min.js' %}"></script>
+        <script src="{% static 'administration/core/source/App.js' %}"></script>
+        <script src="{% static 'administration/core/source/AppNavigation.js' %}"></script>
+        <script src="{% static 'administration/core/source/AppOffcanvas.js' %}"></script>
+        <script src="{% static 'administration/core/source/AppCard.js' %}"></script>
+        <script src="{% static 'administration/core/source/AppForm.js' %}"></script>
+        <script src="{% static 'administration/core/source/AppNavSearch.js' %}"></script>
+        <!-- <script src="{% static 'administration/core/source/AppVendor.js' %}"></script> -->
+        <script src="{% static 'administration/core/demo/Demo.js' %}"></script>
+        
+        <!-- END JAVASCRIPT -->
+        <script src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
+        <script src="//cdn.bootcss.com/moment.js/2.17.1/moment.min.js"></script>
+        <script src="//cdn.bootcss.com/bootstrap-datetimepicker/4.17.44/js/bootstrap-datetimepicker.min.js"></script>
+
+
+        <script type="text/javascript">
+            $('body').on('hidden.bs.modal', '.modal', function () {
+                $(this).removeData('bs.modal');
+            });
+        </script>
+        <script>
+            $(function () {
+                $('.datetime-input').datetimepicker({
+                    format:'YYYY-MM-DD HH:mm:ss'
+                });
+            });
+        </script>
+
+    </body>
+    {% block script %}
+        <script src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+    {% endblock %}
+</html>

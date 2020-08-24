@@ -1,0 +1,34 @@
+{% extends "freelancer_app/base.html" %}
+{% block title%} Profile List{% endblock title %}
+{% block maincontent %}
+<div id="content">
+    <section>
+        <div class="section-body">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+
+                        <div class="col-md-10">
+                            <h3 class="text-center">Freelancer Profile</h3>
+                        </div>
+                        <div class="col-md-2">
+                            <a href="{% url 'freelancer_app:create_profile' %}"><button class="align-right">Create New</button></a>
+                        </div>
+                    </div>
+                    <div>
+                        <table class="table">
+
+                            <tbody>
+                                <tr>
+                                    <th>ID</th>
+                                    <td>{{object.name}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock maincontent %}

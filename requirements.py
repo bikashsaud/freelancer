@@ -1,0 +1,9 @@
+Django==2.2
+django-seed==0.2.2
+Faker==4.1.2
+psycopg2==2.8.5
+python-dateutil==2.8.1
+pytz==2020.1
+six==1.15.0
+sqlparse==0.3.1
+text-unidecode==1.3
