@@ -12,7 +12,7 @@
                             <h3 class="text-center">Freelancer Profile</h3>
                         </div>
                         <div class="col-md-2">
-                            <a href="{% url 'freelancer_app:create_profile' %}"><button class="align-right">Create New</button></a>
+                            <a href="{% url 'freelancer_app:create_profile' %}"><button class="align-right">Add New <i class="fa fa-plus"></i></button></a>
                         </div>
                     </div>
                     <div>
@@ -34,8 +34,8 @@
                                     <td>{{i.email}}</td>
                                     <td>{{i.phone_no}}</td>
                                     <td>
-                                        <button>Delete</button>
-                                        <button>Edit</button>
+                                        <a class="create-btn btn" data-toggle="modal" data-target="#myModal" data-url="{% url 'freelancer_app:delete_profile' i.id %}"><button>Delete</button></a>
+                                        <a href="{% url 'freelancer_app:edit_profile' i.id %}"><button>Edit</button></a>
                                         <a href="{% url 'freelancer_app:profile_view' i.id %}"><button>View</button></a>
                                     </td>
                                 </tr>
@@ -48,4 +48,40 @@
         </div>
     </section>
 </div>
+
+    <!-- Modal Start -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">          
+          <!-- Modal content-->
+          <div class="modal-content">
+            
+          </div>          
+        </div>
+      </div>
+<!-- End Modal -->
+
 {% endblock maincontent %}
+
+{% block script %}
+
+<script>
+    $('.create-btn').click(function(){
+        /* 
+            AJAX Request
+            URL, METHOD defualt = GET, DATA, SUCCESS, ERROR
+        */
+        var url = $(this).data('url');
+        $.ajax({
+            url:url,
+            method:'GET',
+            success:function(data){
+                $('.modal-content').empty();
+                $('.modal-content').append(data);
+            },
+            error:function(data){
+                console.log(data);
+            },
+        });
+    });
+</script>
+{% endblock %}

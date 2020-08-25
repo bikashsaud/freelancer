@@ -5,7 +5,7 @@ from django.views.generic import (
     TemplateView, CreateView, UpdateView, ListView, View,
     FormView, DetailView,DeleteView)
 from django.http import HttpResponse, HttpResponseRedirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 # Create your views here.
 
 class ProfileView(ListView):
@@ -22,7 +22,6 @@ class ProfileCreateView(CreateView):
     template_name = 'freelancer_app/create_profile.html'
     model = Profile
     form_class = ProfileCreateForm
-    # success_url = reverse_lazy('freelancer_app:profile')
 
     def post(self, request):
         if request.method == 'POST':
@@ -41,9 +40,23 @@ class ProfileDetailView(DetailView):
     template_name = 'freelancer_app/profile_detail.html'
     model = Profile
 
-    def get_queryset(self, **kwargs):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         profile_id = self.kwargs.get('pk')
-        profile = Profile.objects.filter(id = profile_id)
-        return profile
+        profile = Profile.objects.get(id = profile_id)
+        context['profile'] = profile
+        skill = Skill.objects.filter(user__id = profile_id)
+        context['skill'] = skill
+        context['lan'] = Language.objects.filter(user__id = profile_id)
+        return context
 
 
+class ProfileUpdateView(UpdateView):
+    template_name = 'freelancer_app/edit_profile.html'
+    model = Profile
+    form_class = ProfileCreateForm
+    success_url = reverse_lazy('freelancer_app:profile')
+
+class ProfileDeleteView(DeleteView):
+    model = Profile
+    success_url = reverse_lazy('freelancer_app:profile')

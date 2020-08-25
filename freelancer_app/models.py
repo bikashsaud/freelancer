@@ -17,6 +17,7 @@ class Profile(models.Model):
 class Skill(models.Model):
     user = models.ForeignKey(Profile, on_delete = models.CASCADE)
     name = models.CharField(max_length = 255)
+    proficiency = models.CharField(max_length = 20, choices=PROFICIENCY)
 
     def __str__(self):
         return self.name

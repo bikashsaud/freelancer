@@ -8,12 +8,12 @@
                 <div class="card-body">
                     <div class="row">
 
-                        <div class="col-md-10">
-                            <h3 class="text-center">Freelancer Profile</h3>
+                        <div class="">
+                            <u>
+                                <h3 class="">{{object.name}} Profile</h3>
+                            </u>
                         </div>
-                        <div class="col-md-2">
-                            <a href="{% url 'freelancer_app:create_profile' %}"><button class="align-right">Create New</button></a>
-                        </div>
+
                     </div>
                     <div>
                         <table class="table">
@@ -21,10 +21,70 @@
                             <tbody>
                                 <tr>
                                     <th>ID</th>
-                                    <td>{{object.name}}</td>
+                                    <td>{{profile.id}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <td>{{profile.name}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Email</th>
+                                    <td>{{profile.email}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Phone no</th>
+                                    <td>{{profile.phone_no}}</td>
                                 </tr>
                             </tbody>
+
                         </table>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <u>
+                                    <h3 class="">Skill</h3>
+                                </u>
+                                <table class="table">
+                                    <thead>
+
+                                        <tr>
+                                            <th>Skill</th>
+                                            <th>Proficiency</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for i in skill%}
+                                        <tr>
+                                            <th>{{i.name}}</th>
+                                            <td>{{i.proficiency}}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="col-md-6">
+                                <u>
+                                    <h3 class="">Languages</h3>
+                                </u>
+                                <table class="table">
+                                    <thead>
+
+                                        <tr>
+                                            <th>Language</th>
+                                            <th>Proficiency</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for i in lan %}
+                                        <tr>
+                                            <th>{{i.language}}</th>
+                                            <td>{{i.proficiency}}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
