@@ -1,11 +1,7 @@
 from django.db import models
 
 # Create your models here.
-PROFICIENCY = (
-    ('Bad','bad'),
-    ('Good', 'good'),
-    ('very good', 'Very Good')
-)
+
 class Profile(models.Model):
     name = models.CharField(max_length = 255)
     email = models.EmailField(unique=True)
@@ -17,7 +13,7 @@ class Profile(models.Model):
 class Skill(models.Model):
     user = models.ForeignKey(Profile, on_delete = models.CASCADE)
     name = models.CharField(max_length = 255)
-    proficiency = models.CharField(max_length = 20, choices=PROFICIENCY)
+    proficiency = models.CharField(max_length = 20)
 
     def __str__(self):
         return self.name
@@ -25,7 +21,7 @@ class Skill(models.Model):
 class Language(models.Model):
     user = models.ForeignKey(Profile, on_delete = models.CASCADE)
     language = models.CharField(max_length=255)
-    proficiency = models.CharField(max_length=32,choices=PROFICIENCY)
+    proficiency = models.CharField(max_length=32)
 
     def __str__(self):
         return self.language

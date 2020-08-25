@@ -30,7 +30,7 @@
                                 {% for i in object_list %}
                                 <tr>
                                     <th>{{i.id}}</th>
-                                    <td>{{i.name}}</td>
+                                    <td>{{i.name|truncatechars:30}}</td>
                                     <td>{{i.email}}</td>
                                     <td>{{i.phone_no}}</td>
                                     <td>

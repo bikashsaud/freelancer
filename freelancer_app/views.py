@@ -1,11 +1,18 @@
+import random
+
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse, reverse_lazy
+from django.views.generic import (CreateView, DeleteView, DetailView, FormView,
+                                  ListView, TemplateView, UpdateView, View)
+
+from django_seed import Seed
+
 from .forms import *
 from .models import *
-from django.views.generic import (
-    TemplateView, CreateView, UpdateView, ListView, View,
-    FormView, DetailView,DeleteView)
-from django.http import HttpResponse, HttpResponseRedirect
-from django.urls import reverse, reverse_lazy
+
+seeder = Seed.seeder()
+
 # Create your views here.
 
 class ProfileView(ListView):
@@ -16,7 +23,6 @@ class ProfileView(ListView):
     def get_queryset(self):
         data = Profile.objects.all()
         return data 
-
 
 class ProfileCreateView(CreateView):
     template_name = 'freelancer_app/create_profile.html'
@@ -30,8 +36,21 @@ class ProfileCreateView(CreateView):
                 name = request.POST.get('name')
                 email = request.POST.get('email')
                 phone_no = request.POST.get('phone_no')
-                profile = Profile.objects.create(name = name, email=email, phone_no=phone_no)
+                profile = Profile(name = name, email=email, phone_no=phone_no)
                 profile.save()
+                # select_data = 
+                profile_new = Profile.objects.get(email = email)
+                seeder.add_entity(Language, 5, {
+                    'user':profile_new,
+                    'language':seeder.faker.name(),                    
+                    'proficiency':random.choice(('Good','Bad', 'Very Good'))
+                })
+                seeder.add_entity(Skill, 5, {
+                    'user':profile_new,
+                    'name':seeder.faker.name(),                    
+                    'proficiency':random.choice(('Good','Bad', 'Very Good'))
+                })
+                seeder.execute()
                 return HttpResponseRedirect(reverse("freelancer_app:profile"))
             else:
                 return HttpResponseRedirect(reverse("freelancer_app:profile"))
@@ -49,7 +68,6 @@ class ProfileDetailView(DetailView):
         context['skill'] = skill
         context['lan'] = Language.objects.filter(user__id = profile_id)
         return context
-
 
 class ProfileUpdateView(UpdateView):
     template_name = 'freelancer_app/edit_profile.html'
